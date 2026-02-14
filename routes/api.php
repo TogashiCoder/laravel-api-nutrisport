@@ -13,6 +13,8 @@ Route::post('/register', [App\Http\Controllers\Api\AuthController::class, 'regis
 Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::get('/products', [App\Http\Controllers\Api\ProductController::class, 'index']);
 Route::get('/products/{id}', [App\Http\Controllers\Api\ProductController::class, 'show']);
+Route::get('/feeds/json', [App\Http\Controllers\Api\FeedController::class, 'json']);
+Route::get('/feeds/xml', [App\Http\Controllers\Api\FeedController::class, 'xml']);
 
 Route::prefix('cart')->group(function (): void {
     Route::post('/items', [App\Http\Controllers\Api\CartController::class, 'addItem']);
