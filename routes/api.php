@@ -14,6 +14,13 @@ Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login'])
 Route::get('/products', [App\Http\Controllers\Api\ProductController::class, 'index']);
 Route::get('/products/{id}', [App\Http\Controllers\Api\ProductController::class, 'show']);
 
+Route::prefix('cart')->group(function (): void {
+    Route::post('/items', [App\Http\Controllers\Api\CartController::class, 'addItem']);
+    Route::delete('/items/{product_id}', [App\Http\Controllers\Api\CartController::class, 'removeItem']);
+    Route::get('/', [App\Http\Controllers\Api\CartController::class, 'show']);
+    Route::delete('/', [App\Http\Controllers\Api\CartController::class, 'clear']);
+});
+
 // User (JWT 6h)
 Route::middleware('auth:api')->group(function (): void {
     Route::post('/logout', [App\Http\Controllers\Api\AuthController::class, 'logout']);
