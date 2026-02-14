@@ -28,6 +28,7 @@ Route::middleware('auth:api')->group(function (): void {
     Route::put('/user/profile', [App\Http\Controllers\Api\AuthController::class, 'updateProfile']);
     Route::put('/user/password', [App\Http\Controllers\Api\AuthController::class, 'updatePassword']);
     Route::get('/orders', [App\Http\Controllers\Api\OrderController::class, 'index']);
+    Route::post('/orders', [App\Http\Controllers\Api\OrderController::class, 'store']);
     Route::get('/orders/{order}', [App\Http\Controllers\Api\OrderController::class, 'show']);
 });
 
