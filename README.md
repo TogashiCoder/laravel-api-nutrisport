@@ -63,6 +63,15 @@ Optional: run the script `./docker/init.sh` (Linux/Mac) to execute the steps abo
 
 Ensure `.env` has `DB_HOST=db` and `REDIS_HOST=redis` when using Docker.
 
+### Scheduled tasks (daily report)
+
+The daily J-1 report is scheduled at 00:00 (app timezone). Set `ADMIN_EMAIL` in `.env` so the report is sent; if unset, the command skips sending.
+
+- **Manual run:** `php artisan reports:daily` (uses yesterday) or `php artisan reports:daily --date=Y-m-d`
+- **Cron (host or container):** run the scheduler every minute, e.g. `* * * * * cd /path-to-app && php artisan schedule:run`, or a single daily entry: `0 0 * * * cd /path-to-app && php artisan reports:daily`
+
+The schedule is defined in `routes/console.php`.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
