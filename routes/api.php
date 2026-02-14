@@ -37,4 +37,8 @@ Route::prefix('agent')->group(function (): void {
     Route::post('/login', [App\Http\Controllers\Api\AgentAuthController::class, 'login']);
     Route::post('/logout', [App\Http\Controllers\Api\AgentAuthController::class, 'logout'])
         ->middleware('auth:agent');
+    Route::middleware('auth:agent')->group(function (): void {
+        Route::get('/orders', [App\Http\Controllers\Api\AgentOrderController::class, 'index']);
+        Route::post('/products', [App\Http\Controllers\Api\AgentProductController::class, 'store']);
+    });
 });
