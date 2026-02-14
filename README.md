@@ -21,6 +21,48 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Docker (NutriSport API)
+
+### Start the stack
+
+```bash
+docker compose up -d
+```
+
+### Init (first time or after fresh clone)
+
+Run once after `docker compose up -d`:
+
+```bash
+# 1. Install dependencies
+docker compose exec app composer install --no-interaction
+
+# 2. Copy environment file (if .env does not exist)
+docker compose exec app cp .env.example .env
+
+# 3. Generate application key
+docker compose exec app php artisan key:generate
+
+# 4. Run migrations and seeders
+docker compose exec app php artisan migrate --seed --force
+```
+
+After Task 02 (JWT), also run:
+
+```bash
+docker compose exec app php artisan jwt:secret
+```
+
+Optional: run the script `./docker/init.sh` (Linux/Mac) to execute the steps above.
+
+### URLs and env
+
+- **API:** http://localhost:8000
+- **DB:** host `db`, port 3306, database `nutrisport`, user `nutrisport`, password set in docker-compose or `.env`
+- **Redis:** host `redis`, port 6379
+
+Ensure `.env` has `DB_HOST=db` and `REDIS_HOST=redis` when using Docker.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
