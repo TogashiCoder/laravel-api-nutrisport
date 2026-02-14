@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 // Public
 Route::post('/register', [App\Http\Controllers\Api\AuthController::class, 'register']);
 Route::post('/login', [App\Http\Controllers\Api\AuthController::class, 'login']);
+Route::get('/products', [App\Http\Controllers\Api\ProductController::class, 'index']);
+Route::get('/products/{id}', [App\Http\Controllers\Api\ProductController::class, 'show']);
 
 // User (JWT 6h)
 Route::middleware('auth:api')->group(function (): void {
