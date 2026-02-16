@@ -55,4 +55,17 @@ class AuthTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure(['user', 'token', 'expires_in']);
     }
+
+    public function test_agent_can_login(): void
+    {
+        $this->seed(\Database\Seeders\AgentSeeder::class);
+
+        $response = $this->postJson('/api/agent/login', [
+            'email' => 'agent@nutrisport.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonStructure(['token', 'expires_in']);
+    }
 }
